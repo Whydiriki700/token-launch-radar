@@ -6,7 +6,7 @@
 
 A token launch radar written for the make.fun token-radar-01 bounty. It reads the competition's sealed DefiLlama snapshot (758 protocols), finds every protocol that still records no token of its own, and ranks them by what their launch would be worth; the result is a static dashboard with the ranked board, a detail view for every protocol, filters, and a concrete farm plan for each row.
 
-The implied value is not a flat multiple of TVL. For every category, the model derives the market's own multiple from the tokenized protocols in the same snapshot (their market cap against their TVL), then applies that category multiple to the tokenless protocols, adjusted for 7-day TVL growth, protocol maturity, and breadth across chains. Every figure on the board traces back to the snapshot's own numbers; no protocol name is special-cased, and the same function scores every row.
+The implied value is not a flat multiple of TVL. For every category, the model derives the market's own multiple from the tokenized protocols in the same snapshot (their market cap against their TVL), then applies that category multiple to the tokenless protocols, adjusted for 7-day TVL growth and protocol maturity. Every figure on the board traces back to the snapshot's own numbers; no protocol name is special-cased, and the same function scores every row.
 
 ## Run it
 
