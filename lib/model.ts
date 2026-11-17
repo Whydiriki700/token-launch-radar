@@ -394,7 +394,25 @@ function actionFor(p: SnapshotProtocol, capital: number, chain: string): string 
   if (c.includes('stable')) return `Mint or deposit $${capital} of the stable asset through ${name} on ${chain}.`;
   if (c.includes('rwa')) return `Mint $${capital} of the protocol's yield asset on ${chain} and hold it.`;
   if (c.includes('insurance')) return `Buy $${capital} of cover from ${name} on ${chain} and keep the policy.`;
+  if (c.includes('basis')) return `Deposit $${capital} of USDC into ${name}'s basis vault on ${chain} and keep the shares.`;
+  if (c.includes('payments')) return `Route a $${capital} payment through ${name} on ${chain} and keep the balance parked there.`;
+  if (c.includes('governance')) return `Deposit $${capital} into ${name}'s incentive program on ${chain} and keep the position open.`;
+  if (c === 'chain') return `Bridge $${capital} of USDC to ${name} and use it in the chain's own apps.`;
   return `Deposit $${capital} of USDC into ${name} on ${chain} and keep the position open.`;
+}
+
+/** The weekly qualifying action, matched to how the category's users actually stay active. */
+function weeklyFor(p: SnapshotProtocol): string {
+  const c = (p.category ?? '').toLowerCase();
+  const name = p.name;
+  if (c.includes('lend') || c.includes('cdp') || c.includes('collateral')) return `Make one qualifying action each week, such as a small borrow against the position or a partial repay on ${name}.`;
+  if (c.includes('dex')) return `Make one qualifying action each week, such as a small swap through ${name} or a rebalance of the pool position.`;
+  if (c.includes('curator') || c.includes('allocator')) return `Make one qualifying action each week, such as a small top-up deposit or a move between ${name} vaults.`;
+  if (c.includes('bridge')) return `Make one qualifying action each week, such as a small bridge transfer through ${name} in either direction.`;
+  if (c.includes('staking') || c.includes('restak')) return `Make one qualifying action each week, such as a small additional stake or a claim of staking rewards on ${name}.`;
+  if (c.includes('perpetual') || c.includes('derivative')) return `Make one qualifying action each week, such as one small hedged trade on ${name} that you close the same day.`;
+  if (c.includes('rwa') || c.includes('stable')) return `Make one qualifying action each week, such as a small additional mint or a partial redeem on ${name}.`;
+  return `Make one qualifying action each week, such as a deposit, a borrow, a swap or a vote on ${name}.`;
 }
 
 /**
@@ -418,7 +436,7 @@ export function farmSteps(p: SnapshotProtocol, age: number | null): FarmStep[] {
       time: '15 minutes to set up',
     },
     {
-      text: `Make one qualifying action each week, such as a deposit, a borrow, a swap or a vote.`,
+      text: weeklyFor(p),
       cost: 'about $2 of gas a week',
       time: '10 minutes a week',
     },
