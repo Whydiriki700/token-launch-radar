@@ -1,3 +1,5 @@
+![token-launch-radar](assets/preview.png)
+
 # token-launch-radar
 
 [![make.fun · token-radar-01](https://make.fun/badge/token-radar-01.svg)](https://make.fun/bounty/token-radar-01?utm_source=github&utm_medium=readme&utm_campaign=token-radar-01)
